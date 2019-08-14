@@ -15,6 +15,7 @@ Plug 'yuttie/comfortable-motion.vim'
 Plug 'jceb/vim-orgmode'
 Plug 'mileszs/ack.vim'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'neomake/neomake'
 " Call :PlugInstall to install new plugins
 call plug#end()
 
@@ -289,7 +290,7 @@ map <Space><Tab> :e#<cr>
 "map <F3> :r !pbpaste<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plug in specific stuff
+" => Plugin specific stuff
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
@@ -330,6 +331,9 @@ if !exists('g:airline_symbols')
 endif
 let g:airline_symbols.space = "\ua0"
  
+" Neomake
+call neomake#configure#automake('nrwi', 250)
+
 """"""""""""""""""""""""""""""
 " => CTRL-P
 """"""""""""""""""""""""""""""
