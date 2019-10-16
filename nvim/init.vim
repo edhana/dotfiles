@@ -17,6 +17,9 @@ Plug 'mileszs/ack.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'neomake/neomake'
 Plug 'xavierd/clang_complete'
+Plug 'scrooloose/nerdcommenter'
+Plug '/usr/local/opt/fzf'
+Plug 'rking/ag.vim'
 " Call :PlugInstall to install new plugins
 call plug#end()
 
@@ -91,23 +94,23 @@ set hid
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 
 " Highlight search results
 set hlsearch
 
 " Makes search act like search in modern browsers
-set incsearch 
+set incsearch
 
 " Don't redraw while executing macros (good performance config)
-set lazyredraw 
+set lazyredraw
 
 " For regular expressions turn magic on
 set magic
 
 " Show matching brackets when text indicator is over them
-set showmatch 
+set showmatch
 
 " How many tenths of a second to blink when matching brackets
 set mat=2
@@ -182,7 +185,7 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
-map <leader>bn <C-W>l 
+map <leader>bn <C-W>l
 map <leader>bp <C-W>h
 map <leader>wc <C-W>q
 map <leader>bj <C-W>j
@@ -194,7 +197,7 @@ map <leader>bl <C-W>l
 map <leader>bd :Bclose<cr>:tabclose<cr>gT
 
 " Close all the buffers
-map <leader>ba :bufdo bd<cr>   
+map <leader>ba :bufdo bd<cr>
 
 map <leader>l :bnext<cr>
 map <leader>h :bprevious<cr>
@@ -203,8 +206,8 @@ map <leader>h :bprevious<cr>
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove 
-map <leader>t<leader> :tabnext 
+map <leader>tm :tabmove
+map <leader>t<leader> :tabnext
 
 " Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
@@ -219,7 +222,7 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" Specify the behavior when switching between buffers 
+" Specify the behavior when switching between buffers
 try
   set switchbuf=useopen,usetab,newtab
   set stal=2
@@ -306,7 +309,7 @@ map <leader>ft :NERDTreeToggle<cr>
 map <leader>nb :NERDTreeFromBookmark<Space>
 map <leader>nf :NERDTreeFind<cr>
 
-" => bufExplorer plugin            
+" => bufExplorer plugin
 let g:bufExplorerDefaultHelp=0
 let g:bufExplorerShowRelativePath=1
 let g:bufExplorerFindActive=1
@@ -315,7 +318,8 @@ map <leader>o :BufExplorer<cr>
 
 " Ag vim - silver searcher with ack.vim
 let g:ackprg = 'ag --nogroup --nocolor --column'
-map <leader>g :Ack 
+let g:ag_working_path_mode="r"
+map <leader>g :Ack
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
@@ -331,7 +335,7 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 let g:airline_symbols.space = "\ua0"
- 
+
 " Neomake
 call neomake#configure#automake('nrwi', 250)
 
@@ -341,11 +345,11 @@ let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/
 """"""""""""""""""""""""""""""
 " => CTRL-P
 """"""""""""""""""""""""""""""
-let g:ctrlp_working_path_mode = 0
+let g:ctrlp_working_path_mode = 'ra'
 
-let g:ctrlp_map = '<c-p>'
+let g:ctrlp_map = '<leader>zp'
 " map <leader>j :CtrlP<cr>
-" map <c-p> :CtrlPBuffer<cr>
+map <c-p> :CtrlPBuffer<cr>
 map <leader>bp :CtrlPBuffer<cr>
 map <leader>zz :CtrlPMRU<cr>
 
@@ -354,6 +358,11 @@ let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee|^\vend
 " let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
 let g:ctrlp_extensions = ['line']
 map <leader>zs :CtrlPLine<cr>
+
+""""""""""""""""""""""""""""""
+" => FZF
+""""""""""""""""""""""""""""""
+map <c-p> :FZF<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
@@ -389,7 +398,7 @@ endfunction
 
 function! CmdLine(str)
     call feedkeys(":" . a:str)
-endfunction 
+endfunction
 
 function! VisualSelection(direction, extra_filter) range
     let l:saved_reg = @"
@@ -406,5 +415,3 @@ function! VisualSelection(direction, extra_filter) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
-
-
