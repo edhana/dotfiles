@@ -18,8 +18,13 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'neomake/neomake'
 Plug 'xavierd/clang_complete'
 Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-commentary'
 Plug '/usr/local/opt/fzf'
 Plug 'rking/ag.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'tpope/vim-fugitive'
 " Call :PlugInstall to install new plugins
 call plug#end()
 
@@ -33,10 +38,10 @@ set clipboard=unnamed
 " set relativenumber
 
 if !&scrolloff
-  set scrolloff=3       " Show next 3 lines while scrolling.
+  set scrolloff=1       " Show next 3 lines while scrolling.
 endif
 if !&sidescrolloff
-  set sidescrolloff=5   " Show next 5 columns while side-scrolling.
+  set sidescrolloff=1   " Show next 5 columns while side-scrolling.
 endif
 
 set display+=lastline
@@ -155,8 +160,9 @@ set expandtab
 set smarttab
 
 " 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
+" set shiftwidth=4
+" set tabstop=4
+set tabstop=2 shiftwidth=2 expandtab
 
 " Linebreak on 500 characters
 set lbr
@@ -329,7 +335,15 @@ let g:airline_powerline_fonts = 1
 "let g:airline#extensions#tabline#left_alt_sep = '>'
 set noshowmode
 
-let g:airline_theme='light'
+" let g:airline_theme='light'
+" let g:airline_theme='angr'
+let g:airline_theme='one'
+colorscheme one
+
+" Set background color to None(real black) and high line the current line
+highlight Normal ctermbg=None
+set cursorline
+
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
